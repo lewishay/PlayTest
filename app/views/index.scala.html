@@ -1,7 +1,59 @@
-@(message: String)
-
-@main("Welcome to Play") {
-
-    @play20.welcome(message)
-
+@main("Homepage") {
+    <!DOCTYPE html>
+    <html>
+        <header>
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
+            <h1>Welcome to the test page</h1>
+            <nav>
+                <a href=#>End of the Internet</a>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <article>
+                    <h2>Links</h2>
+                    <p>Please browse around the webpage and enjoy your stay</p> <br>
+                    <p></p>
+                    <p>Enter a number between 0 and 9 in the box below, then click the button</p>
+                    <input style="width: 30px" id="theNumber">
+                    <form action="/numbers/">
+                        <input type="submit" value="Submit">
+                    </form>
+                </article>
+            </section>
+            <aside>
+                <div class=capsule>
+                    <h3>The End of the Internet</h3>
+                    <p>The button here will take you to The End of the Internet.</p> <br>
+                    <form action="/out">
+                        <input type="submit" value="Go to The End"/>
+                    </form>
+                </div>
+                <div class=capsule>
+                    <h3>Error pages</h3>
+                    <p>Click one of the buttons here to be taken to different error pages</p> <br>
+                    <form action="/blarg">
+                        <input type="submit" value="Not found"/>
+                    </form>
+                    <form action="/bad">
+                        <input type="submit" value="Bad request"/>
+                    </form>
+                    <form action="/server">
+                        <input type="submit" value="Internal server error"/>
+                    </form>
+                    <form action="/hell">
+                        <input type="submit" value="Custom error status"/>
+                    </form>
+                </div>
+                <div class=capsule>
+                    <h3>Unbelievable</h3>
+                    <p>Click the button here to have your mind BLOWN!</p> <br>
+                    <form action="/cool">
+                        <input type="submit" value="LET'S GO!"/>
+                    </form>
+                </div>
+            </aside>
+        </main>
+        <footer>&copy; Lewis Hay, 2017</footer>
+    </html>
 }

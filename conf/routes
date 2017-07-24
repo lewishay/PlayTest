@@ -5,5 +5,19 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Other pages
+GET     /out                        controllers.Application.out
+GET     /blarg                      controllers.Application.notFound
+GET     /bad                        controllers.Application.badRequest
+GET     /server                     controllers.Application.internalServ
+GET     /hell                       controllers.Application.customStatus
+GET     /numbers/$numb<[0-9]+>      controllers.Application.number(numb: Int)
+GET     /cool                       controllers.Application.coolPage
+
+# Two duplicate routes. The first one is chosen because it has higher priority
+GET     /duplicate                  controllers.Application.result1
+GET     /duplicate                  controllers.Application.result2
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
