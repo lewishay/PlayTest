@@ -7,17 +7,30 @@ GET     /                           controllers.Application.index
 
 # Other pages
 GET     /out                        controllers.Application.out
-GET     /blarg                      controllers.Application.notFound
+GET     /blarg                      controllers.Default.notFound
 GET     /bad                        controllers.Application.badRequest
-GET     /server                     controllers.Application.internalServ
+GET     /server                     controllers.Default.error
 GET     /hell                       controllers.Application.customStatus
-GET     /numbers/$numb<[0-9]+>      controllers.Application.number(numb: Int)
-GET     /cool                       controllers.Application.coolPage
+GET     /cool                       controllers.Default.todo
+GET     /session                    controllers.Application.getSessionName
+GET     /session/remove             controllers.Application.removeSession
+
+# Dynamic value for hello
+GET     /hello/:name                controllers.Application.hello(name)
+# Static value for hello
+GET     /hello/Bill                 controllers.Application.hello(name = "Bill")
+# Default value for hello
+GET     /hello                      controllers.Application.hello(name: String ?= "Bob")
+
+# Dynamic value for number
+GET     /numbers/$numb<[0-9]>       controllers.Application.number(numb: Int)
+
+# Optional value
+GET     /months                     controllers.Application.listMonths(numMonths: Option[Int])
 
 # Two duplicate routes. The first one is chosen because it has higher priority
 GET     /duplicate                  controllers.Application.result1
 GET     /duplicate                  controllers.Application.result2
-
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

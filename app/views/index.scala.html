@@ -5,22 +5,54 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
             <h1>Welcome to the test page</h1>
             <nav>
-                <a href=#>End of the Internet</a>
+                <a href=/out>Want to leave this awful website? Click here!</a>
             </nav>
+            <script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
         </header>
         <main>
-            <section>
-                <article>
-                    <h2>Links</h2>
-                    <p>Please browse around the webpage and enjoy your stay</p> <br>
-                    <p></p>
+            <div><h2>Please browse around the webpage and enjoy your stay.</h2></div>
+            <aside>
+                <div class=capsule>
+                    <h3>Greeting</h3>
+                    <p>Enter your name in the box to receive a greeting (or leave it empty for a default value)</p>
+                    <input style="width: 300px" id="theName"> <br>
+                    <form id="nameForm" onSubmit="yourName();">
+                        <input type="submit" value="Get greeting"/>
+                    </form> <br>
+                    <p>Or alternatively, get a greeting for a pre-determined value</p>
+                    <form id="nameForm" action="/hello/Bill">
+                        <input type="submit" value="Get greeting for Bill"/>
+                    </form>
+                </div>
+                <div class=capsule>
+                    <h3>Number</h3>
                     <p>Enter a number between 0 and 9 in the box below, then click the button</p>
-                    <input style="width: 30px" id="theNumber">
-                    <form action="/numbers/">
+                    <input style="width: 30px" id="theNumber"> <br>
+                    <form id="numberForm" onSubmit="yourNumber();">
                         <input type="submit" value="Submit">
                     </form>
-                </article>
-            </section>
+                </div>
+                <div class=capsule>
+                    <h3>Months</h3>
+                    <p>Enter a number below to display the first X calendar months, or enter nothing to display
+                        them all. (these actions also opens a new tab)</p>
+                    <input style="width: 30px" id="theMonths"> <br>
+                    <form id="monthsForm" onSubmit="numMonths();">
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <div class="capsule">
+                    <h3>Cookies</h3>
+                    <p>A session is automatically started when this page is loaded. Click the buttons below to
+                    check the user of the current session, or to remove the current session user.</p>
+                    <form action="/session">
+                        <input type="submit" value="Check session user">
+                    </form>
+                    <form action="/session/remove">
+                        <input type="submit" value="Remove session user">
+                    </form>
+                </div>
+            </aside>
             <aside>
                 <div class=capsule>
                     <h3>The End of the Internet</h3>
@@ -32,18 +64,20 @@
                 <div class=capsule>
                     <h3>Error pages</h3>
                     <p>Click one of the buttons here to be taken to different error pages</p> <br>
-                    <form action="/blarg">
-                        <input type="submit" value="Not found"/>
-                    </form>
-                    <form action="/bad">
-                        <input type="submit" value="Bad request"/>
-                    </form>
-                    <form action="/server">
-                        <input type="submit" value="Internal server error"/>
-                    </form>
-                    <form action="/hell">
-                        <input type="submit" value="Custom error status"/>
-                    </form>
+                    <table >
+                        <form action="/blarg">
+                            <input type="submit" value="Not found"/>
+                        </form>
+                        <form action="/bad">
+                            <input type="submit" value="Bad request"/>
+                        </form>
+                        <form action="/server">
+                            <input type="submit" value="Internal server error"/>
+                        </form>
+                        <form action="/hell">
+                            <input type="submit" value="Custom error status"/>
+                        </form>
+                    </table>
                 </div>
                 <div class=capsule>
                     <h3>Unbelievable</h3>
