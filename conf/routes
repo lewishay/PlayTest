@@ -8,7 +8,9 @@ GET     /                           controllers.Application.index
 # Drinks pages
 GET     /drinks                     controllers.Application.getDrinks
 POST    /drinks                     controllers.Application.createDrink
-GET     /editDrinks                 controllers.Application.editDrink
+GET     /editDrinks                 controllers.Application.editDrinks
+POST    /editDrinks                 controllers.Application.updateDrink
+GET     /editDrinks/:drinkName      controllers.Application.deleteDrink(drinkName)
 
 # Other pages
 GET     /out                        controllers.Application.out

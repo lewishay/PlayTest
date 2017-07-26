@@ -15,11 +15,11 @@ object Drink {
       "Name" -> nonEmptyText,
       "Manufacturer" -> nonEmptyText,
       "Price" -> of[Double],
-      "Volume" -> number(min = 0)
+      "Volume" -> number(min = 1)
     ) (Drink.apply)(Drink.unapply)
   )
 
-  val drinks = ArrayBuffer(
+  var drinks = ArrayBuffer(
     Drink("Pepsi", "PepsiCo", 1.19, 500),
     Drink("Sprite", "The Coca-Cola Company", 0.69, 330),
     Drink("Monster Ultra", "Monster Beverage", 1.89, 500)

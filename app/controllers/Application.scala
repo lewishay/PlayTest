@@ -46,9 +46,9 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
 
   def listMonths(numMonths: Option[Int]) = Action {
     val months = List("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
-    "November", "December")
+      "November", "December")
     numMonths match {
-      case Some(x) => if(x > 12) {
+      case Some(x) => if (x > 12) {
         Ok("Error, invalid number")
       }
       else {
@@ -59,15 +59,16 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
   }
 
   def getSessionName = Action {
-    request => request.session.get("mySession").map {
-      user => Ok("The user of this session is: " + user)
-    }.getOrElse {
-      Unauthorized("Oops, you are not connected")
-    }
+    request =>
+      request.session.get("mySession").map {
+        user => Ok("The user of this session is: " + user)
+      }.getOrElse {
+        Unauthorized("Oops, you are not connected")
+      }
   }
 
   def removeSession = Action {
-      Ok("Session removed.").withNewSession
+    Ok("Session removed.").withNewSession
   }
 
   def getDrinks = Action { implicit request =>
@@ -84,7 +85,23 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
     })
   }
 
-  def editDrink = Action { implicit request =>
+  def editDrinks = Action { implicit request =>
     Ok(views.html.editDrinks(Drink.drinks, Drink.createDrinkForm))
+  }
+
+  def updateDrink = Action { implicit request =>
+    val formValidationResult = Drink.createDrinkForm.bindFromRequest
+    formValidationResult.fold({ formWithErrors =>
+      BadRequest(views.html.drinks(Drink.drinks, formWithErrors))
+    }, { drink =>
+      Drink.drinks = Drink.drinks.filter(x => x.name != drink.name)
+      Drink.drinks.append(drink)
+      Redirect(routes.Application.editDrinks)
+    })
+  }
+
+  def deleteDrink(theDrink: String) = Action { implicit request =>
+    Drink.drinks = Drink.drinks.filter(x => x.name != theDrink)
+    Redirect(routes.Application.editDrinks)
   }
 }
