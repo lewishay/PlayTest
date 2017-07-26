@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Drinks pages
+GET     /drinks                     controllers.Application.getDrinks
+POST    /drinks                     controllers.Application.createDrink
+GET     /editDrinks                 controllers.Application.editDrink
+
 # Other pages
 GET     /out                        controllers.Application.out
 GET     /blarg                      controllers.Default.notFound

@@ -89,6 +89,16 @@ main article p {
     color: #198d35;
     line-height: 1.5;
 }
+table {
+    line-height: 2;
+    border-spacing: 2px;
+}
+tbody {
+    color: #198d35;
+}
+th, td {
+    padding-right: 70px;
+}
 .capsule {
     margin-left: auto;
     margin-right: auto;

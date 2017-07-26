@@ -1,9 +1,13 @@
 package controllers
 
+import javax.inject.Inject
+
+import models.Drink
 import play.api._
+import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 
-class Application extends Controller {
+class Application @Inject() (val messagesApi: MessagesApi) extends Controller with I18nSupport {
   def index = Action {
     Ok(views.html.index()).withSession("mySession" -> "Lewis")
   }
@@ -64,5 +68,23 @@ class Application extends Controller {
 
   def removeSession = Action {
       Ok("Session removed.").withNewSession
+  }
+
+  def getDrinks = Action { implicit request =>
+    Ok(views.html.drinks(Drink.drinks, Drink.createDrinkForm))
+  }
+
+  def createDrink = Action { implicit request =>
+    val formValidationResult = Drink.createDrinkForm.bindFromRequest
+    formValidationResult.fold({ formWithErrors =>
+      BadRequest(views.html.drinks(Drink.drinks, formWithErrors))
+    }, { drink =>
+      Drink.drinks.append(drink)
+      Redirect(routes.Application.getDrinks)
+    })
+  }
+
+  def editDrink = Action { implicit request =>
+    Ok(views.html.editDrinks(Drink.drinks, Drink.createDrinkForm))
   }
 }
