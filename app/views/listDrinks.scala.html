@@ -1,25 +1,20 @@
 @(drinks: Seq[Drink], form: Form[Drink])(implicit messages: Messages)
 
-@main("Drinks") {
+@main("List Drinks") {
 <!DOCTYPE html>
   <html>
     <header>
       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
       <h1>Drinks</h1>
-      <nav>
-        <a href=/editDrinks>Edit drinks</a>
-      </nav>
-      <nav>
-        <a href=/drinks>List drinks</a>
-      </nav>
-      <nav>
-        <a href=/>Home</a>
-      </nav>
+      <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
+      <nav><a href=/updateDrinks>Update Drinks</a></nav>
+      <nav><a href=/listDrinks>List Drinks</a></nav>
+      <nav><a href=/>Home</a> </nav>
     </header>
     <main>
       <aside>
         <div class="capsule">
-          <h2>The current list of drinks</h2>
+          <h2>The current list of Drinks</h2>
           <table>
             <thead>
               <tr><th>Name</th><th>Manufacturer</th><th>Price</th><th>Volume</th></tr>

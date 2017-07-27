@@ -1,0 +1,28 @@
+@(form: Form[DrinkNameOnly], errorMessage: String = "")(implicit messages: Messages)
+
+@main("Edit Drinks") {
+<!DOCTYPE html>
+  <html>
+    <header>
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
+      <h1>Edit Drinks</h1>
+      <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
+      <nav><a href=/updateDrinks>Update Drinks</a></nav>
+      <nav><a href=/listDrinks>List Drinks</a></nav>
+      <nav><a href=/>Home</a> </nav>
+    </header>
+    <main>
+      <aside>
+        <div class="capsule">
+          <h2>Delete a drink</h2>
+          <h4 align="center">@errorMessage</h4>
+          @helper.form(routes.Application.deleteDrink()) {
+            @helper.inputText(form("Name"), '_showConstraints -> false)
+            <button type="submit">Delete drink</button>
+          }
+        </div>
+      </aside>
+    </main>
+    <footer>&copy; Lewis Hay, 2017</footer>
+  </html>
+}

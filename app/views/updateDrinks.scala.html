@@ -1,0 +1,31 @@
+@(form: Form[Drink], errorMessage: String = "")(implicit messages: Messages)
+
+@main("Update Drinks") {
+<!DOCTYPE html>
+  <html>
+    <header>
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
+      <h1>Update Drinks</h1>
+      <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
+      <nav><a href=/updateDrinks>Update Drinks</a></nav>
+      <nav><a href=/listDrinks>List Drinks</a></nav>
+      <nav><a href=/>Home</a> </nav>
+    </header>
+    <main>
+      <aside>
+        <div class="capsule">
+          <h2>Update a drink</h2>
+          <h4 align="center">@errorMessage</h4>
+          @helper.form(routes.Application.updateDrink()) {
+            @helper.inputText(form("Name"), '_showConstraints -> false)
+            @helper.inputText(form("Manufacturer"), '_showConstraints -> false)
+            @helper.inputText(form("Price"), '_showConstraints -> false)
+            @helper.inputText(form("Volume"), '_showConstraints -> false)
+            <button type="submit">Update drink</button>
+          }
+        </div>
+      </aside>
+    </main>
+    <footer>&copy; Lewis Hay, 2017</footer>
+  </html>
+}

@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject.Inject
 
-import models.Drink
+import models.{Drink, DrinkNameOnly}
 import play.api._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
@@ -72,36 +72,55 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
   }
 
   def getDrinks = Action { implicit request =>
-    Ok(views.html.drinks(Drink.drinks, Drink.createDrinkForm))
+    Ok(views.html.listDrinks(Drink.drinks, Drink.createDrinkForm))
   }
 
   def createDrink = Action { implicit request =>
     val formValidationResult = Drink.createDrinkForm.bindFromRequest
     formValidationResult.fold({ formWithErrors =>
-      BadRequest(views.html.drinks(Drink.drinks, formWithErrors))
+      BadRequest(views.html.listDrinks(Drink.drinks, formWithErrors))
     }, { drink =>
       Drink.drinks.append(drink)
       Redirect(routes.Application.getDrinks)
     })
   }
 
-  def editDrinks = Action { implicit request =>
-    Ok(views.html.editDrinks(Drink.drinks, Drink.createDrinkForm))
+  def updateDrinks = Action { implicit request =>
+    Ok(views.html.updateDrinks(Drink.createDrinkForm))
   }
 
   def updateDrink = Action { implicit request =>
     val formValidationResult = Drink.createDrinkForm.bindFromRequest
     formValidationResult.fold({ formWithErrors =>
-      BadRequest(views.html.drinks(Drink.drinks, formWithErrors))
+      BadRequest(views.html.updateDrinks(formWithErrors))
     }, { drink =>
-      Drink.drinks = Drink.drinks.filter(x => x.name != drink.name)
-      Drink.drinks.append(drink)
-      Redirect(routes.Application.editDrinks)
+      if(Drink.drinks.map(x => x.name).contains(drink.name)) {
+        Drink.drinks = Drink.drinks.filter(x => x.name != drink.name)
+        Drink.drinks.append(drink)
+        Redirect(routes.Application.updateDrinks)
+      }
+      else {
+        BadRequest(views.html.updateDrinks(Drink.createDrinkForm, "No drink with that name exists!"))
+      }
     })
   }
 
-  def deleteDrink(theDrink: String) = Action { implicit request =>
-    Drink.drinks = Drink.drinks.filter(x => x.name != theDrink)
-    Redirect(routes.Application.editDrinks)
+  def deleteDrinks = Action { implicit request =>
+    Ok(views.html.deleteDrinks(DrinkNameOnly.singleDrinkForm))
+  }
+
+  def deleteDrink = Action { implicit request =>
+    val formValidationResult = DrinkNameOnly.singleDrinkForm.bindFromRequest
+    formValidationResult.fold({ formWithErrors =>
+      BadRequest(views.html.deleteDrinks(formWithErrors))
+    }, { drink =>
+      if(Drink.drinks.map(x => x.name).contains(drink.name)) {
+        Drink.drinks = Drink.drinks.filter(x => x.name != drink.name)
+        Redirect(routes.Application.deleteDrinks)
+      }
+      else {
+        BadRequest(views.html.deleteDrinks(DrinkNameOnly.singleDrinkForm, "No drink with that name exists!"))
+      }
+    })
   }
 }
