@@ -63,7 +63,7 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
       request.session.get("mySession").map {
         user => Ok("The user of this session is: " + user)
       }.getOrElse {
-        Unauthorized("Oops, you are not connected")
+        Unauthorized("Oops, there is no saved session.")
       }
   }
 

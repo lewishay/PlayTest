@@ -24,10 +24,12 @@ header {
 }
 header h1 {
     margin: 0;
+    font-size: 30pt;
 }
 header nav {
     display: block;
     overflow: hidden;
+    font-size: 18pt;
 }
 header nav a {
     display: inline-block;
@@ -93,6 +95,9 @@ main article {
 main article p {
     color: #198d35;
     line-height: 1.5;
+}
+button {
+    background: #e7e7e7;
 }
 table {
     line-height: 2;

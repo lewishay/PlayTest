@@ -1,26 +1,29 @@
 @main("Homepage") {
 <!DOCTYPE html>
   <html>
-    <header>
+    <header id="theHead">
       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
       <h1>Welcome to the home page</h1>
       <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
       <nav><a href=/updateDrinks>Update Drinks</a></nav>
       <nav><a href=/listDrinks>List Drinks</a></nav>
       <nav><a href=/>Home</a> </nav>
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
     </header>
-    <main>
+    <main id="theMain">
       <aside>
         <div class=capsule>
           <h3>Greeting</h3>
           <p>Enter your name in the box to receive a greeting (or leave it empty for a default value)</p>
           <input style="width: 300px" id="theName"> <br>
           <form id="nameForm" onSubmit="yourName();">
-            <input type="submit" value="Get greeting"/>
+            <button type="submit">Get greeting</button>
           </form> <br>
           <p>Or alternatively, get a greeting for a pre-determined value</p>
           <form id="nameForm" action="/hello/Bill">
-            <input type="submit" value="Get greeting for Bill"/>
+            <button type="submit">Get greeting for Bill</button>
           </form>
         </div>
         <div class=capsule>
@@ -28,7 +31,7 @@
           <p>Enter a number between 0 and 9 in the box below, then click the button</p>
           <input style="width: 30px" id="theNumber"> <br>
           <form id="numberForm" onSubmit="yourNumber();">
-            <input type="submit" value="Submit">
+            <button type="submit">Submit</button>
           </form>
         </div>
         <div class=capsule>
@@ -37,7 +40,7 @@
             them all. (these actions also opens a new tab)</p>
           <input style="width: 30px" id="theMonths"> <br>
           <form id="monthsForm" onSubmit="numMonths();">
-            <input type="submit" value="Submit">
+            <button type="submit">Submit</button>
           </form>
         </div>
         <div class="capsule">
@@ -45,10 +48,10 @@
           <p>A session is automatically started when this page is loaded. Click the buttons below to
             check the user of the current session, or to remove the current session user.</p>
           <form action="/session">
-            <input type="submit" value="Check session user">
+            <button type="submit">Check session user</button>
           </form>
           <form action="/session/remove">
-            <input type="submit" value="Remove session user">
+            <button type="submit">Remove session</button>
           </form>
         </div>
       </aside>
@@ -57,7 +60,7 @@
           <h3>The End of the Internet</h3>
           <p>The button here will take you to The End of the Internet.</p> <br>
           <form action="/out">
-            <input type="submit" value="Go to The End"/>
+            <button type="submit">Go to the end</button>
           </form>
         </div>
         <div class=capsule>
@@ -65,16 +68,16 @@
           <p>Click one of the buttons here to be taken to different error pages</p> <br>
           <table >
             <form action="/blarg">
-              <input type="submit" value="Not found"/>
+              <button type="submit">Not found</button>
             </form>
             <form action="/bad">
-              <input type="submit" value="Bad request"/>
+              <button type="submit">Bad request</button>
             </form>
             <form action="/server">
-              <input type="submit" value="Internal server error"/>
+              <button type="submit">Internal server error</button>
             </form>
             <form action="/hell">
-              <input type="submit" value="Custom error status"/>
+              <button type="submit">Custom error status</button>
             </form>
           </table>
         </div>
@@ -82,12 +85,19 @@
           <h3>Unbelievable</h3>
           <p>Click the button here to have your mind BLOWN!</p> <br>
           <form action="/cool">
-            <input type="submit" value="LET'S GO!"/>
+            <button type="submit">LET'S GO!</button>
+          </form>
+        </div>
+        <div class=capsule>
+          <h3>Colour change</h3>
+          <p>Click the button here to temporarily change the colour scheme of the home page</p> <br>
+          <form action="javascript:colourChange()">
+            <button type="submit">Change it!</button>
           </form>
         </div>
       </aside>
     </main>
-    <footer>&copy; Lewis Hay, 2017</footer>
+    <footer id="theFoot">&copy; Lewis Hay, 2017</footer>
     <script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
   </html>
 }
