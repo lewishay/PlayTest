@@ -42,3 +42,8 @@ GET     /duplicate                  controllers.Application.result2
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Database pages
+GET     /database                   controllers.Application.database
+GET     /database/create            controllers.Mongo.create
+POST    /database/find/:lastName    controllers.Mongo.findByName(lastName)

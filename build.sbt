@@ -13,5 +13,9 @@ libraryDependencies ++= Seq("org.reactivemongo" %% "play2-reactivemongo" % "0.12
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
+routesGenerator := InjectedRoutesGenerator
 
+import play.sbt.routes.RoutesKeys
+
+RoutesKeys.routesImport += "play.modules.reactivemongo.PathBindables._"
 

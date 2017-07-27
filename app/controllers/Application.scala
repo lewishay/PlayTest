@@ -6,6 +6,7 @@ import models.{Drink, DrinkNameOnly}
 import play.api._
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
+import reactivemongo.bson.BSONObjectID
 
 class Application @Inject() (val messagesApi: MessagesApi) extends Controller with I18nSupport {
   def index = Action {
@@ -122,5 +123,9 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
         BadRequest(views.html.deleteDrinks(DrinkNameOnly.singleDrinkForm, "No drink with that name exists!"))
       }
     })
+  }
+
+  def database = Action {
+    Ok(views.html.database())
   }
 }
