@@ -3,7 +3,7 @@
   <html>
     <header id="theHead">
       <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
-      <h1>Welcome to the home page</h1>
+      <h1>Home page</h1>
       <nav><a href="/database">Database</a></nav>
       <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
       <nav><a href=/updateDrinks>Update Drinks</a></nav>
@@ -38,7 +38,7 @@
         <div class=capsule>
           <h3>Months</h3>
           <p>Enter a number below to display the first X calendar months, or enter nothing to display
-            them all. (these actions also opens a new tab)</p>
+            them all. (these actions also open a new tab)</p>
           <input style="width: 30px" id="theMonths"> <br>
           <form id="monthsForm" onSubmit="numMonths();">
             <button type="submit">Submit</button>
@@ -94,6 +94,13 @@
           <p>Click the button here to temporarily change the colour scheme of the home page</p> <br>
           <form action="javascript:colourChange()">
             <button type="submit">Change it!</button>
+          </form>
+        </div>
+        <div class=capsule>
+          <h3>Cheat Sheet</h3>
+          <p>Click the button here to view the IntelliJ Cheat Sheet</p>
+          <form action="/file">
+            <button type="submit">View file</button>
           </form>
         </div>
       </aside>

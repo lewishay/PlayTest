@@ -1,0 +1,31 @@
+@(hangman: Hangman)
+
+@main("Hangman") {
+<!DOCTYPE html>
+  <html>
+    <header>
+      <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
+      <h1>Database</h1>
+      <nav><a href="/database">Database</a></nav>
+      <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
+      <nav><a href=/updateDrinks>Update Drinks</a></nav>
+      <nav><a href=/listDrinks>List Drinks</a></nav>
+      <nav><a href=/>Home</a> </nav>
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
+      <img src="@routes.Assets.at("images/cokeBottle.png")" alt="Coke Bottle" width="6%" height="6%" align="center">
+    </header>
+    <main>
+      <aside>
+        <h2>Play a game of hangman</h2>
+        <form onsubmit="@hangman.playGame()">
+          <button type="submit">Play</button>
+        </form>
+        <input type="text">@hangman.prevGuesses</input>
+        <input type="text">@hangman.current</input>
+        <input type="text">@hangman.hangmanImage</input>
+      </aside>
+    </main>
+    <footer>&copy; Lewis Hay, 2017</footer>
+  </html>
+}

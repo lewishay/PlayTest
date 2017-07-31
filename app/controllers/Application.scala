@@ -1,12 +1,15 @@
 package controllers
 
 import javax.inject.Inject
+import javax.xml.transform.stream.StreamSource
 
-import models.{Drink, DrinkNameOnly}
-import play.api._
+import models.{Drink, DrinkNameOnly, Hangman}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
-import reactivemongo.bson.BSONObjectID
+import akka.stream.scaladsl._
+import akka.util.ByteString
+import play.api.http.HttpEntity
+import play.api.libs.json.Json
 
 class Application @Inject() (val messagesApi: MessagesApi) extends Controller with I18nSupport {
   def index = Action {
@@ -127,5 +130,36 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
 
   def database = Action {
     Ok(views.html.database())
+  }
+
+  def hangman = Action {
+    Ok(views.html.hangman(new Hangman(null, null, null)))
+  }
+
+  def file1 = Action {
+    Ok.sendFile(
+      content = new java.io.File("public/IntelliJ Cheat Sheet.pdf"),
+      fileName = _ => "cheatSheet.pdf")
+  }
+
+  def file2 = Action {
+    val file = new java.io.File("public/annual_report_2009.pdf")
+    val path: java.nio.file.Path = file.toPath
+    val source: Source[ByteString, _] = FileIO.fromPath(path)
+    val contentLength = Some(file.length())
+    Result(
+      header = ResponseHeader(200, Map.empty),
+      body = HttpEntity.Streamed(source, contentLength, Some("application/pdf"))
+    )
+  }
+
+  def chunked1 = Action {
+    val stringList = Source.apply(List("Bazooka", "Mortar", "Banana bomb", "Holy hand grenade", "Homing pigeon"))
+    Ok.chunked(stringList)
+  }
+
+  def chunked2 = Action {
+    val jsonList = Source.apply(List(scala.io.Source.fromURL("http://json-schema.org/example/geo.json").mkString))
+    Ok.chunked(jsonList)
   }
 }
