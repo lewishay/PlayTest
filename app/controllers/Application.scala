@@ -1,17 +1,12 @@
 package controllers
 
 import javax.inject.Inject
-import javax.xml.transform.stream.StreamSource
-
 import models.{Drink, DrinkNameOnly, Guess, Hangman}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import akka.stream.scaladsl._
 import akka.util.ByteString
 import play.api.http.HttpEntity
-import play.api.libs.json.Json
-
-import scala.collection.mutable.ArrayBuffer
 
 class Application @Inject() (val messagesApi: MessagesApi) extends Controller with I18nSupport {
   def index = Action {
@@ -135,7 +130,10 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
   }
 
   def hangman = Action { implicit request =>
-    if(!Hangman.playing) Hangman.newGame()
+    if(!Hangman.playing) {
+      Hangman.newGame()
+      makeGuess
+    }
     Ok(views.html.hangman(Guess.makeGuessForm))
   }
 

@@ -5,7 +5,8 @@
     <html>
       <header>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/basic.css")">
-        <h1>Database</h1>
+        <h1>Hangman</h1>
+        <nav><a href="/hangman">Hangman</a></nav>
         <nav><a href="/database">Database</a></nav>
         <nav><a href="/deleteDrinks">Delete Drinks</a></nav>
         <nav><a href=/updateDrinks>Update Drinks</a></nav>
@@ -17,14 +18,19 @@
       </header>
       <main>
         <aside>
-          <h2>Play a game of hangman</h2>
-          @helper.form(routes.Application.makeGuess()) {
-            @helper.inputText(form("Guess"))
-            <button type="submit">Make guess</button>
-          }
-          <pre>
-            <h2>@Hangman.result</h2>
-          </pre>
+          <div class="capsule">
+            <h2>Play a game of hangman!</h2>
+            @helper.form(routes.Application.makeGuess()) {
+              @helper.inputText(form("Guess"))
+              <button type="submit">Make guess</button>
+            }
+            <br>
+          </div> <br> <br>
+        </aside>
+        <aside>
+            <pre>
+              <h2>@Hangman.result</h2>
+            </pre>
         </aside>
       </main>
       <footer>&copy; Lewis Hay, 2017</footer>
