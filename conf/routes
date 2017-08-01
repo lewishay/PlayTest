@@ -22,12 +22,13 @@ GET     /hell                       controllers.Application.customStatus
 GET     /cool                       controllers.Default.todo
 GET     /session                    controllers.Application.getSessionName
 GET     /session/remove             controllers.Application.removeSession
-GET     /hangman                    controllers.Default.todo
+GET     /hangman                    controllers.Application.hangman
+POST    /hangman                    controllers.Application.makeGuess
 GET     /cheatSheet                 controllers.Application.file1
 GET     /largePDF                   controllers.Application.file2
 GET     /stringList                 controllers.Application.chunked1
 GET     /jsonList                   controllers.Application.chunked2
-GET     /clock                      controllers.CometController.clock
+GET     /clock                      controllers.Default.todo
 
 # Dynamic value for hello
 GET     /hello/:name                controllers.Application.hello(name)

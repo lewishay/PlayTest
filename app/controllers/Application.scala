@@ -3,13 +3,15 @@ package controllers
 import javax.inject.Inject
 import javax.xml.transform.stream.StreamSource
 
-import models.{Drink, DrinkNameOnly, Hangman}
+import models.{Drink, DrinkNameOnly, Guess, Hangman}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc._
 import akka.stream.scaladsl._
 import akka.util.ByteString
 import play.api.http.HttpEntity
 import play.api.libs.json.Json
+
+import scala.collection.mutable.ArrayBuffer
 
 class Application @Inject() (val messagesApi: MessagesApi) extends Controller with I18nSupport {
   def index = Action {
@@ -132,8 +134,19 @@ class Application @Inject() (val messagesApi: MessagesApi) extends Controller wi
     Ok(views.html.database())
   }
 
-  def hangman = Action {
-    Ok(views.html.hangman(new Hangman(null, null, null)))
+  def hangman = Action { implicit request =>
+    if(!Hangman.playing) Hangman.newGame()
+    Ok(views.html.hangman(Guess.makeGuessForm))
+  }
+
+  def makeGuess = Action { implicit request =>
+    val formValidationResult = Guess.makeGuessForm.bindFromRequest
+    formValidationResult.fold({ formWithErrors =>
+      BadRequest(views.html.hangman(formWithErrors))
+    }, { result =>
+      Hangman.makeMove(result.guess)
+      Redirect(routes.Application.hangman())
+    })
   }
 
   def file1 = Action {
