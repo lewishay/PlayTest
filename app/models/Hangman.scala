@@ -10,7 +10,7 @@ object Hangman {
   val hangmanImage = Array("         _______","         |     |","         |     O","         |    /|\\",
     "         |    / \\","         |","       __|___","       |    |")
   val wordList =
-    Source.fromFile("C:/Users/Administrator/IdeaProjects/TestPlay/app/models/wordlist.txt").getLines().toArray
+    Source.fromFile("C:/Users/Administrator/IdeaProjects/TestPlay/public/wordlist.txt").getLines().toArray
   val rand = new scala.util.Random
   var guessWord = ""
   var current = new ArrayBuffer[Char]
