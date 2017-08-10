@@ -5,5 +5,52 @@
 # Home page
 GET     /                           controllers.Application.index
 
+# Drinks pages
+GET     /listDrinks                 controllers.Application.getDrinks
+POST    /listDrinks                 controllers.Application.createDrink
+GET     /updateDrinks               controllers.Application.updateDrinks
+POST    /updateDrinks               controllers.Application.updateDrink
+GET     /deleteDrinks               controllers.Application.deleteDrinks
+POST    /deleteDrinks               controllers.Application.deleteDrink
+
+# Other pages
+GET     /out                        controllers.Application.out
+GET     /blarg                      controllers.Default.notFound
+GET     /bad                        controllers.Application.badRequest
+GET     /server                     controllers.Default.error
+GET     /hell                       controllers.Application.customStatus
+GET     /cool                       controllers.Default.todo
+GET     /session                    controllers.Application.getSessionName
+GET     /session/remove             controllers.Application.removeSession
+GET     /hangman                    controllers.Application.hangman
+POST    /hangman                    controllers.Application.makeGuess
+GET     /cheatSheet                 controllers.Application.file1
+GET     /largePDF                   controllers.Application.file2
+GET     /stringList                 controllers.Application.chunked1
+GET     /jsonList                   controllers.Application.chunked2
+GET     /clock                      controllers.Default.todo
+
+# Dynamic value for hello
+GET     /hello/:name                controllers.Application.hello(name)
+# Static value for hello
+GET     /hello/Bill                 controllers.Application.hello(name = "Bill")
+# Default value for hello
+GET     /hello                      controllers.Application.hello(name: String ?= "Bob")
+
+# Dynamic value for number
+GET     /numbers/$numb<[0-9]>       controllers.Application.number(numb: Int)
+
+# Optional value
+GET     /months                     controllers.Application.listMonths(numMonths: Option[Int])
+
+# Two duplicate routes. The first one is chosen because it has higher priority
+GET     /duplicate                  controllers.Application.result1
+GET     /duplicate                  controllers.Application.result2
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Database pages
+GET     /database                   controllers.Application.database
+GET     /database/create            controllers.Mongo.create
+POST    /database/find/:lastName    controllers.Mongo.findByName(lastName)
